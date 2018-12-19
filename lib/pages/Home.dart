@@ -15,7 +15,7 @@ class Home extends StatelessWidget {
         body: Column(
           children: <Widget>[
             HomeBanner(
-              imageSrc: 'assets/authors/Lao-Tzu.jpg',
+              imageSrc: 'assets/authors/Michael-Jordan.jpg',
             ),
             AuthorThumbnail(
               imageSrc: 'assets/authors/Michael-Jordan.jpg',
@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
               onPressed: () => print('author pressed'),
             ),
             IconThumbnail(
-              name: 'Love',
+              name: 'Saint Patricks Day',
               icon: Icons.favorite,
               onPressed: () => print('icon pressed'),
             ),

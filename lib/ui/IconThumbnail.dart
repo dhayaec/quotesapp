@@ -14,8 +14,22 @@ class IconThumbnail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-      constraints: BoxConstraints(maxHeight: 100, maxWidth: 100),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            offset: Offset(2.0, 1.0),
+            blurRadius: 2.0,
+            color: Colors.grey,
+          ),
+          BoxShadow(
+            offset: Offset(3.0, 1.0),
+            blurRadius: 3.0,
+            color: Colors.grey[100],
+          ),
+        ],
+      ),
+      constraints: BoxConstraints(minHeight: 100, minWidth: 120),
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         splashColor: COLOR_SPLASH,
