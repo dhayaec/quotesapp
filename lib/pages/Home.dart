@@ -12,11 +12,14 @@ class Home extends StatelessWidget {
           imageSrc: 'assets/authors/Lao-Tzu.jpg',
         ),
         AuthorThumbnail(
-          imageSrc: 'assets/authors/Ralph-Waldo-Emerson.jpg',
-          name: 'Ralph-Waldo-Emerson',
+          imageSrc: 'assets/authors/Michael-Jordan.jpg',
+          name: 'Winston Churchill',
+          onPressed: () => print('author pressed'),
         ),
         IconThumbnail(
-          topicName: 'Love',
+          name: 'Love',
+          icon: Icons.favorite,
+          onPressed: () => print('icon pressed'),
         )
       ],
     );

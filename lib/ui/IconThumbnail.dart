@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:quotesapp/utils/constants.dart';
 
 class IconThumbnail extends StatelessWidget {
-  final String topicName;
-  IconThumbnail({Key key, @required this.topicName});
+  final String name;
+  final IconData icon;
+  final Function onPressed;
+
+  IconThumbnail(
+      {Key key,
+      @required this.icon,
+      @required this.name,
+      @required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       constraints: BoxConstraints(maxHeight: 100, maxWidth: 100),
-      child: FittedBox(
-        fit: BoxFit.contain,
+      child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        splashColor: COLOR_SPLASH,
+        onPressed: onPressed,
+        color: Colors.white,
+        padding: EdgeInsets.all(10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.favorite,
-              ),
-              onPressed: () {},
+            Icon(
+              icon,
+              size: 60,
+              color: COLOR_PRIMARY,
             ),
-            Text('$topicName')
+            Text("$name")
           ],
         ),
       ),
