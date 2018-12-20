@@ -15,7 +15,8 @@ Future main() async {
   BlocSupervisor().delegate = SimpleBlocDelegate();
 
   DBHelper db = new DBHelper();
-  var g = await db.getAllGenre();
+  // var g = await db.getQuotes(page: 2, authorId: 7);
+  var g = await db.getQuoteById(id: 1);
   print(g.toString());
 
   runApp(MyApp());
