@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
+import 'package:quotesapp/db/DBHelper.dart';
 import 'package:quotesapp/pages/Home.dart';
 import 'package:quotesapp/utils/constants.dart';
 
@@ -10,8 +11,13 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 }
 
-void main() {
+Future main() async {
   BlocSupervisor().delegate = SimpleBlocDelegate();
+
+  DBHelper db = new DBHelper();
+  var g = await db.getAllGenre();
+  print(g.toString());
+
   runApp(MyApp());
 }
 
