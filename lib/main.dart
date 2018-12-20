@@ -17,7 +17,10 @@ Future main() async {
   DBHelper db = new DBHelper();
   // var g = await db.getQuotes(page: 2, authorId: 7);
   var g = await db.getQuoteById(id: 1);
-  print(g.toString());
+  print("${g.author}, ${g.favorite}, ${g.genre}");
+
+  var q = await db.getQuotes();
+  q.forEach((item) => print('${item.quote} - ${item.id}'));
 
   runApp(MyApp());
 }
