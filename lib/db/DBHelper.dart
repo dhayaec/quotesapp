@@ -32,13 +32,16 @@ class DBHelper {
     // so#51384175
     Directory docDir = await getApplicationDocumentsDirectory();
     String dbPath = join(docDir.path, 'qdb.db');
-    // if (FileSystemEntity.typeSync(dbPath) == FileSystemEntityType.notFound) {
-    ByteData data = await rootBundle.load(join('assets', 'db', 'qdb.db'));
-    List<int> bytes =
-        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    await new File(dbPath).writeAsBytes(bytes);
-    // }
-    return await openDatabase(dbPath, version: 1, onCreate: _onCreate);
+    File(dbPath).deleteSync();
+
+    if (FileSystemEntity.typeSync(dbPath) == FileSystemEntityType.notFound) {
+      ByteData data = await rootBundle.load(join('assets', 'db', 'qdb.db'));
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      await new File(dbPath).writeAsBytes(bytes);
+    }
+    var db = await openDatabase(dbPath, version: 1, onCreate: _onCreate);
+    return db;
   }
 
   void _onCreate(Database db, int version) async {}

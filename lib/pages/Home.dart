@@ -9,38 +9,62 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(APP_NAME),
-        ),
-        body: Column(
-          children: <Widget>[
-            HomeBanner(
-              imageSrc: 'assets/authors/Michael-Jordan.jpg',
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            leading: Icon(Icons.favorite),
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(APP_NAME),
             ),
-            AuthorThumbnail(
-              imageSrc: 'assets/authors/Michael-Jordan.jpg',
-              name: 'Winston Churchill',
-              onPressed: () => print('author pressed'),
-            ),
-            IconThumbnail(
-              name: 'Saint Patricks Day',
-              icon: Icons.favorite,
-              onPressed: () => print('icon pressed'),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Author(
-                            imgSrc: 'assets/authors/Michael-Jordan.jpg',
-                            name: 'Micheal Jordan Quotes',
-                          )),
-                );
-              },
-              child: Text('Author'),
-            )
-          ],
-        ));
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Column(
+                children: <Widget>[
+                  HomeBanner(
+                    imageSrc: 'assets/authors/Michael-Jordan.jpg',
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                child: Flex(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Topics', style: Theme.of(context).textTheme.title),
+                    FlatButton(
+                      child: Text(
+                        'All Topics',
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                      onPressed: () {},
+                      padding: EdgeInsets.all(0),
+                    )
+                  ],
+                  direction: Axis.horizontal,
+                ),
+              ),
+              Container(
+                height: 100,
+                margin: EdgeInsets.only(left: 10),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return IconThumbnail(
+                      name: 'Saint Patrick day',
+                      icon: Icons.favorite,
+                      onPressed: () => print('icon pressed'),
+                    );
+                  },
+                ),
+              ),
+            ]),
+          )
+        ],
+      ),
+    );
   }
 }

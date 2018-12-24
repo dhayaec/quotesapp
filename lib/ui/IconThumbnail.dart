@@ -13,37 +13,27 @@ class IconThumbnail extends StatelessWidget {
       @required this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            offset: Offset(2.0, 1.0),
-            blurRadius: 2.0,
-            color: Colors.grey,
-          ),
-          BoxShadow(
-            offset: Offset(3.0, 1.0),
-            blurRadius: 3.0,
-            color: Colors.grey[100],
-          ),
-        ],
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
       ),
-      constraints: BoxConstraints(minHeight: 100, minWidth: 120),
+      margin: EdgeInsets.all(5),
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         splashColor: COLOR_SPLASH,
         onPressed: onPressed,
         color: Colors.white,
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(5),
         child: Column(
           children: <Widget>[
             Icon(
               icon,
               size: 60,
-              color: COLOR_PRIMARY,
+              color: Theme.of(context).accentColor,
             ),
-            Text("$name")
+            Text(
+              "$name",
+            )
           ],
         ),
       ),
