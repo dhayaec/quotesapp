@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quotesapp/pages/AuthorPage.dart';
+import 'package:quotesapp/components/AuthorsList.dart';
+import 'package:quotesapp/components/QOD.dart';
+import 'package:quotesapp/components/TopicsList.dart';
 import 'package:quotesapp/pages/DetailPage.dart';
-import 'package:quotesapp/ui/AuthorThumbnail.dart';
-import 'package:quotesapp/ui/HomeBanner.dart';
-import 'package:quotesapp/ui/IconThumbnail.dart';
 import 'package:quotesapp/ui/TitleSection.dart';
 import 'package:quotesapp/utils/constants.dart';
 
@@ -41,65 +40,19 @@ class HomePage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              Column(
-                children: <Widget>[
-                  HomeBanner(
-                    imageSrc: 'assets/authors/Michael-Jordan.jpg',
-                  ),
-                ],
-              ),
+              QOD(),
               TitleSection(
                 buttonText: 'All Topics',
                 onClick: () {},
                 title: 'Topics',
               ),
-              Container(
-                height: 100,
-                margin: EdgeInsets.only(left: 10),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return IconThumbnail(
-                      name: 'Saint Patrick day',
-                      icon: Icons.favorite,
-                      onPressed: () => print('icon pressed'),
-                    );
-                  },
-                ),
-              ),
+              TopicsList(),
               TitleSection(
                 buttonText: 'All Authors',
                 onClick: () {},
                 title: 'Authors',
               ),
-              Container(
-                height: 100,
-                margin: EdgeInsets.only(left: 10),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return AuthorThumbnail(
-                      imageSrc: 'assets/authors/Walt-Disney.jpg',
-                      name: 'Albert Einstein',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AuthorPage(
-                                    imgSrc:
-                                        'assets/authors/George-Bernard-Shaw.jpg',
-                                    name: 'George Bernard Shaw',
-                                  )),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
+              AuthorsList(),
             ]),
           )
         ],

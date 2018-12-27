@@ -25,6 +25,7 @@ class DBHelper {
   Future<Database> get db async {
     if (_db != null) return _db;
     _db = await initDb();
+    Sqflite.devSetDebugModeOn(true);
     return _db;
   }
 
@@ -46,16 +47,23 @@ class DBHelper {
 
   void _onCreate(Database db, int version) async {}
 
-  Future<List<Genre>> getAllGenre() async {
+  Future<List<Genre>> getAllGenre({int limit}) async {
     var dbc = await db;
-    var result = await dbc.query(_genreTable,
-        columns: ['id', 'name', 'weight'], orderBy: 'weight');
+    List result;
+    if (limit != null) {
+      result = await dbc.query(_genreTable,
+          columns: ['id', 'name', 'weight'],
+          orderBy: 'weight DESC',
+          limit: limit);
+    } else {
+      result = await dbc.query(_genreTable, columns: ['id', 'name', 'weight']);
+    }
     return result.map((item) => Genre.fromJson(item)).toList();
   }
 
   Future<List<Author>> getAllAuthors({int isPopular = 0}) async {
     var dbc = await db;
-    var res;
+    List res;
     if (isPopular == 1) {
       res = await dbc.query(_authorTable,
           columns: ['id', 'name', 'popular'],
@@ -68,13 +76,14 @@ class DBHelper {
   }
 
   Future<List<Quote>> getQuotes(
-      {int page = 1, int authorId, int genreId}) async {
+      {int page = 1, int authorId, int genreId, bool limited = true}) async {
     var dbc = await db;
     var offset = (page - 1) * _LIMIT;
 
     String cols = 'id,quote,$author,$genre,favorite';
 
     String _whereClause = '';
+    String _limitClause = '';
     if (authorId != null) {
       _whereClause += ' WHERE author_id=$authorId';
       offset = 0;
@@ -84,19 +93,25 @@ class DBHelper {
       offset = 0;
     }
 
-    var q =
-        'SELECT $cols from $_quotesTable $_whereClause LIMIT $_LIMIT OFFSET $offset ';
+    if (limited) {
+      _limitClause = 'LIMIT $_LIMIT OFFSET $offset ';
+    } else {
+      _limitClause = '';
+    }
+
+    var q = 'SELECT $cols from $_quotesTable $_whereClause ' + _limitClause;
     var res = await dbc.rawQuery(q);
     return res.map((item) => Quote.fromJson(item)).toList();
   }
 
-  Future<Quote> getQuoteById({int id}) async {
+  Future<dynamic> getQuoteById({int id}) async {
     var dbc = await db;
     var quote = await dbc.query(_quotesTable,
         columns: ['id', 'quote', author, genre],
         where: 'id=?',
         whereArgs: [id]);
-    return Quote.fromJson(quote[0]);
+    var quoteList = quote.toList();
+    return Quote.fromJson(quoteList[0]);
   }
 
   Future<int> getQuotesCount() async {
