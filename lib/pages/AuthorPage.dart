@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quotesapp/ui/QListView.dart';
-import 'package:quotesapp/ui/ShadowedText.dart';
 
-class Author extends StatelessWidget {
+class AuthorPage extends StatelessWidget {
   final String imgSrc;
   final String name;
 
-  Author({Key key, @required this.name, @required this.imgSrc});
+  AuthorPage({Key key, @required this.name, @required this.imgSrc});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +23,7 @@ class Author extends StatelessWidget {
                   )
                 ],
                 flexibleSpace: FlexibleSpaceBar(
-                    title: ShadowedText(text: name),
+                    title: Text(name + ' Quotes'),
                     background: Image.asset(
                       imgSrc,
                       fit: BoxFit.cover,

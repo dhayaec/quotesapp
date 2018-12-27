@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:quotesapp/db/DBHelper.dart';
-import 'package:quotesapp/pages/Home.dart';
+import 'package:quotesapp/pages/HomePage.dart';
 import 'package:quotesapp/utils/constants.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -34,8 +34,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.deepPurple),
       title: APP_NAME,
-      home: Home(),
+      home: HomePage(),
     );
   }
 }

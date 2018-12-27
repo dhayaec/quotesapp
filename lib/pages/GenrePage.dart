@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quotesapp/ui/QListView.dart';
 import 'package:quotesapp/ui/ShadowedText.dart';
 
-class Genre extends StatelessWidget {
+class GenrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

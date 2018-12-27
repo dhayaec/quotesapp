@@ -17,13 +17,13 @@ class AuthorThumbnail extends StatelessWidget {
     return Container(
       width: 100,
       height: 100,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          image: new DecorationImage(
-            colorFilter: new ColorFilter.mode(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.6), BlendMode.dstATop),
-            image: new AssetImage(imageSrc),
+            image: AssetImage(imageSrc),
             fit: BoxFit.cover,
           ),
           gradient: LinearGradient(

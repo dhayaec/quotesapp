@@ -29,7 +29,7 @@ class IconThumbnail extends StatelessWidget {
             Icon(
               icon,
               size: 60,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).primaryColor,
             ),
             Text(
               "$name",
